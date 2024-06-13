@@ -34,7 +34,10 @@ export default function Chat() {
 
     }
 
-    useEffect(() => {getAllMessages()}, [flag])
+    useEffect(() => {
+        getAllMessages()
+        const interval = setInterval(() => {getAllMessages()}, 10000);
+        return () => clearInterval(interval);}, [flag])
 
     return (
         <div className={styles.container}>
