@@ -1,0 +1,31 @@
+.container {
+    max-width: 700px;
+    padding: 50px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    background-color: #131316;
+}
+
+.h2 {
+    color: #ffffff;
+    text-align: center;
+}
+.container div {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+}
+.userNameLabel {
+    text-align: center;
+    color: #cccccc;
+    font-size: 19px;
+    margin-top: 5px;
+}
+.Button {
+    border-radius: 5px;
+    font-size: 20px;
+    cursor: pointer;
+    background-color: #ffffff;
+    font-weight: bold;
+}
