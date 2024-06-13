@@ -41,7 +41,7 @@ export default function Chat() {
             <div className={styles.messages}>
                 {messages.map((msg) => (
                     <div key={msg.id} className={styles.message}>
-                        <img src={msg.profileImg != "null" ? msg.profileImg : "/user.jpg"} alt={msg.user} width={40} height={40} />
+                        <img src={msg.profileImg.includes("http") ? msg.profileImg : "/user.jpg"} alt={msg.user} width={40} height={40} />
                         <div className={styles.content}>
                             <strong>{msg.authorName}</strong>
                             <p>{msg.message}</p>
