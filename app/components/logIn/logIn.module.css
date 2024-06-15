@@ -1,0 +1,81 @@
+.backImg {
+    background-image: url('/background.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    color: #ffffff;
+    background-color: #0F0C29;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.form{
+    display: flex;
+    flex-direction: column;
+}
+
+.loginCard {
+    width: 100%;
+    max-width: 400px;
+    padding: 2em;
+    background-color: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border: 1px solid #c8cacb;
+    display: flex;
+    flex-direction: column;
+    margin: 5%;
+}
+
+.loginHeader {
+    font-size: 28px;
+}
+
+.inputContainer {
+    margin-top: 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.inputLabel {
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+.inputField {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    flex: 1;
+}
+
+.btnSignIn {
+    padding: 12px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #BD0C47;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+    flex: 1;
+}
+
+.btnSignIn:hover {
+    background-color: #960837;
+}
+
+.btnSignIn:active {
+    background-color: #ec3872;
+}
+
+.required {
+    color: red;
+}

@@ -1,10 +1,16 @@
+'use client'
+
 import styles from "./page.module.css";
-import { LoginApi } from './Api/Auth.api';
+import { RecoilRoot } from "recoil";
+import LogIn from "@/app/components/logIn/logIn";
+
 
 export default function Home() {
-  return (
-    <main>
-
-    </main>
-  );
+    return (
+        <>
+            <RecoilRoot>
+                <LogIn/>
+            </RecoilRoot>
+        </>
+    );
 }
