@@ -8,13 +8,9 @@ export const LoginApi = async (username: string, pass: string) => {
             username,
             pass,
         });
-        if (response.status === 200) {
-            return response.data;
-        } else {
-            throw new Error('Login failed. Please check your credentials.');
-        }
-    } catch (error) {
-        throw new Error('Login failed. Please check your credentials.');
+        return response.data;
+    } catch (error: any) {
+        return error.response.data;
     }
 };
 
@@ -27,11 +23,10 @@ export const ChangeProfileApi = async (accessToken: string, imageLink: string) =
                 'Authorization': accessToken,
             }
         });
-        if(response.status === 201){
-            return response.data;
-        }
-    } catch(error) {
-        return error;
+
+        return response.data;
+    } catch (error: any) {
+        return error.response.data;
     }
 };
 
@@ -45,11 +40,10 @@ export const ChangePassApi = async (accessToken: string, lastPass: string, newPa
                 'Authorization': accessToken,
             }
         });
-        if(response.status === 201){
-            return response.data;
-        }
-    } catch(error) {
-        return error;
+        
+        return response.data;
+    } catch (error: any) {
+        return error.response.data;
     }
 };
 
@@ -60,11 +54,10 @@ export const GetUserApi = async (accessToken: string) => {
                 'Authorization': accessToken,
             }
         });
-        if(response.status === 200){
-            return response.data;
-        }
-    } catch(error) {
-        return error;
+        return response.data;
+
+    } catch (error: any) {
+        return error.response.data;
     }
 };
 

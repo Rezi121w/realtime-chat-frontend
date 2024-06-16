@@ -1,24 +1,25 @@
 import React, { useState } from 'react';
-import { useRecoilState } from 'recoil';
 import styles from './logIn.module.css';
 import Image from 'next/image';
-import { errorState, passwordState, usernameState } from "@/app/recoilAtoms";
 import { LoginApi } from "@/app/Api/Auth.api";
 
-const LogIn = () => {
-    const [username, setUsername] = useRecoilState(usernameState);
-    const [password, setPassword] = useRecoilState(passwordState);
-    const [error, setError] = useRecoilState(errorState);
-    const [success, setSuccess] = useState<string | null>(null);
+const LogIn = ({router}: any) => {
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    const [error, setError] = useState("");
+    const [success, setSuccess] = useState("");
 
-    const handleLogin = async () => {
-        try {
-            const data = await LoginApi(username, password);
-            setSuccess('Login successful!');
-            console.log('Login successful:', data);
-        } catch (error) {
-            setError('Failed to log in. Please try again.');
-            console.error('Login error:', error);
+    const handleLogin = async (event: any) => {
+        event.preventDefault();
+
+        const loginResponse = await LoginApi(username, password);
+        if(!loginResponse.accessToken) {
+            setError(loginResponse.message);
+        } else {
+            setSuccess("Successfully logged in!");
+            setError("");
+            localStorage.setItem("user", loginResponse.accessToken);
+            router.push("/chats");
         }
     };
 
@@ -52,9 +53,7 @@ const LogIn = () => {
                             required
                         />
                     </div>
-                    <button type="submit" className={styles.btnSignIn}>
-                        Sign In
-                    </button>
+                    <button onClick={handleLogin} type="submit" className={styles.btnSignIn}>Sign In</button>
                 </form>
             </div>
         </div>

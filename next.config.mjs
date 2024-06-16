@@ -10,7 +10,7 @@ const nextConfig = {
         ],
       },
     env: {
-      Base_URL: 'back.cybermusic.online',
+      Base_URL: 'https://back.cybermusic.online',
     },
 };
 
