@@ -1,0 +1,21 @@
+.panelBorder {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    border-top:1px solid #FFFFFF26;
+}
+
+.adminPanel, .changePanel, .outPanel{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    cursor: pointer;
+}
+
+
+.out{
+    color: #FF5555;
+}

@@ -1,0 +1,88 @@
+.mainContainer {
+    border-radius: 16px;
+    background-color: #222222;
+    margin: 14px;
+    padding: 2rem;
+    color: #ffffff;
+    border: 1px solid #ffffff26;
+    flex: 1;
+    background-image: url("/grad.svg");
+    background-repeat: no-repeat;
+    background-position: bottom;
+    background-size: cover;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.chatsCont {
+    max-height: 80vh;
+    overflow-y: auto;
+    padding-right: 8px;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+}
+
+
+.chatsCont::-webkit-scrollbar {
+    width: 6px;
+}
+
+.chatsCont::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+.chatsCont::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+}
+
+.chat, .chatResponse {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.chatText {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.userTime {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: center;
+}
+
+.userName {
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: 700;
+}
+
+.time {
+    color: #7C8B9F;
+    font-size: 13px;
+}
+
+.userMessage {
+    background-color: #1E1F25;
+    padding: 13px;
+    border-radius: 16px;
+    border-top-left-radius: 0;
+}
+
+.chatResponse {
+    justify-content: flex-end;
+}
+
+.yourMessage {
+    background-color: #5051F9;
+    padding: 13px;
+    border-radius: 16px;
+    border-top-right-radius: 0;
+}
+

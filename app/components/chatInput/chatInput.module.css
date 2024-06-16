@@ -1,0 +1,19 @@
+.input{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.inputInfo{
+    color: #ffffff;
+    background-color: transparent;
+    border: 1px #E5E5E54D solid;
+    border-radius: 10px;
+    padding: 16px 70px 16px 16px;
+    flex: 0.5;
+}
+
+.inputImg{
+   margin-top: 4px;
+}

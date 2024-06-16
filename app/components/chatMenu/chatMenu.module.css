@@ -1,0 +1,37 @@
+.nav {
+    background-color: #222222;
+    padding: 1rem;
+    color: #ffffff;
+    border-right: 1px solid #ffffff26;
+}
+
+.user {
+    background-color: #ffffff0d;
+    display: flex;
+    padding: 0.75rem 1rem;
+    border-radius: 10px;
+    gap: 0.75rem;
+    align-items: center;
+    max-width: 100%;
+    width: 276px;
+
+}
+
+.userInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.userRole {
+    color: #e5e5e566;
+    font-size: 14px;
+}
+
+.chatsPlace {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 90%;
+}
+

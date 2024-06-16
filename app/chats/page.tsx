@@ -1,10 +1,21 @@
 'use client'
 
+import styles from './page.module.css';
+import ChatMenu from "@/app/components/chatMenu/chatMenu";
+
+import RealChat from '../components/realChat/realChat';
+
 export default function Chats() {
 
     return (
         <>
-            <h1>Chats:</h1>
+            <div className={styles.chatsMain}>
+                <ChatMenu/>
+
+                <RealChat/>
+
+
+            </div>
         </>
     );
 }
