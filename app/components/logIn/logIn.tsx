@@ -2,34 +2,49 @@ import React, { useState } from 'react';
 import styles from './logIn.module.css';
 import Image from 'next/image';
 import { LoginApi } from "@/app/Api/Auth.api";
+import { Bounce, ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const LogIn = ({router}: any) => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    const [error, setError] = useState("");
-    const [success, setSuccess] = useState("");
 
     const handleLogin = async (event: any) => {
         event.preventDefault();
 
         const loginResponse = await LoginApi(username, password);
         if(!loginResponse.accessToken) {
-            setError(loginResponse.message);
+            toast.error(loginResponse.message);
         } else {
-            setSuccess("Successfully logged in!");
-            setError("");
+            toast.success("Successfully Logined!");
             localStorage.setItem("user", loginResponse.accessToken);
             router.push("/chats");
         }
     };
 
+    // Toast INFO //
+    
+    
     return (
+        <>
+        <ToastContainer 
+            position='top-center'
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="light"
+            transition={Bounce}
+        />
+
         <div className={`section ${styles.backImg}`}>
             <div className={`sectionContent ${styles.loginCard}`}>
                 <Image src={'/bird.png'} alt="bird" width={70} height={70} className={styles.logo} priority/>
                 <h1 className={styles.loginHeader}>Login</h1>
-                {error && <div className={styles.errorMsg}>{error}</div>}
-                {success && <div className={styles.successMsg}>{success}</div>}
                 <form onSubmit={handleLogin} className={styles.form}>
                     <div className={styles.inputContainer}>
                         <label className={styles.inputLabel}>Username <span className={styles.required}>*</span></label>
@@ -57,6 +72,7 @@ const LogIn = ({router}: any) => {
                 </form>
             </div>
         </div>
+        </>
     );
 };
 
