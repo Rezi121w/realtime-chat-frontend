@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styles from './logIn.module.css';
 import Image from 'next/image';
 import { LoginApi } from "@/app/Api/Auth.api";
+// React-Toastify //
 import { Bounce, ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -13,6 +14,7 @@ const LogIn = ({router}: any) => {
         event.preventDefault();
 
         const loginResponse = await LoginApi(username, password);
+
         if(!loginResponse.accessToken) {
             toast.error(loginResponse.message);
         } else {
