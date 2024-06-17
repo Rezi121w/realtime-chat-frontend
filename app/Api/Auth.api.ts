@@ -1,6 +1,7 @@
 import axios from "axios";
 
 const BASEURL = process.env.Base_URL;
+const accessToken = localStorage.getItem("user") || "";
 
 export const LoginApi = async (username: string, pass: string) => {
     try {
@@ -48,7 +49,7 @@ export const ChangePassApi = async (accessToken: string, lastPass: string, newPa
     }
 };
 
-export const GetUserApi = async (accessToken: string) => {
+export const GetUserApi = async () => {
     try {
         const response = await axios.get(`${BASEURL}/auth/me`, {
             headers: {

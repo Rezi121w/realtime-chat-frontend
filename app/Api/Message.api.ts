@@ -1,8 +1,9 @@
 import axios from "axios";
 
 const BASEURL = process.env.Base_URL;
+const accessToken = localStorage.getItem("user") || "";
 
-export const createMessageApi = async (chatId: string, message: string, accessToken: string) => {
+export const createMessageApi = async (chatId: string, message: string) => {
     try {
         const response = await axios.post(`${BASEURL}/messages`, {
             chatId: Number(chatId),
@@ -18,7 +19,7 @@ export const createMessageApi = async (chatId: string, message: string, accessTo
     }
 };
 
-export const changeMessageApi = async (messageId: string, newMessage: string, accessToken: string) => {
+export const changeMessageApi = async (messageId: string, newMessage: string) => {
     try {
         const response = await axios.put(`${BASEURL}/messages/${messageId}`, {
             content: newMessage,
@@ -33,7 +34,7 @@ export const changeMessageApi = async (messageId: string, newMessage: string, ac
     }
 };
 
-export const deleteMessageApi = async (messageId: string, accessToken: string) => {
+export const deleteMessageApi = async (messageId: string) => {
     try {
         const response = await axios.delete(`${BASEURL}/messages/${messageId}`, {
             headers: {

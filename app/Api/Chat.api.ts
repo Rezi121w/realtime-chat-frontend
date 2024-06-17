@@ -1,8 +1,9 @@
 import axios from "axios";
 
 const BASEURL = process.env.Base_URL;
+const accessToken = localStorage.getItem("user") || "";
 
-export const getChatsApi = async (accessToken: string) => {
+export const getChatsApi = async () => {
     try {
         const response = await axios.get(`${BASEURL}/chats`, {
             headers: {
@@ -15,7 +16,7 @@ export const getChatsApi = async (accessToken: string) => {
     }
 };
 
-export const getChatByIdApi = async (id: string, accessToken: string) => {
+export const getChatByIdApi = async (id: string) => {
     try {
         const response = await axios.get(`${BASEURL}/chats/${id}`, {
             headers: {

@@ -1,0 +1,17 @@
+.mainContainer {
+    border-radius: 16px;
+    background-color: #222222;
+    margin: 14px;
+    padding: 2rem;
+    color: #ffffff;
+    border: 1px solid #ffffff26;
+    flex: 1;
+    background-image: url("/grad.svg");
+    background-repeat: no-repeat;
+    background-position: bottom;
+    background-size: cover;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}

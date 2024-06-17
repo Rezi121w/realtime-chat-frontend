@@ -4,7 +4,7 @@ import { GetUserApi } from './Api/Auth.api';
 const getUserData = async () => {
   if (typeof window !== 'undefined') {
     try {
-      const userData = await GetUserApi(localStorage.getItem('user') || "null");
+      const userData = await GetUserApi();
       return userData;
     } catch (error) {
       console.error('Error fetching user data:', error);

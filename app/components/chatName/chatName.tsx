@@ -13,7 +13,7 @@ export default function ChatName() {
     const [chatArray, setChatArray] = useState<chatProps[]>([{id: 0, name: ""}]);
 
     async function getChats() {
-        const allChats = await getChatsApi(localStorage.getItem("user") || "");
+        const allChats = await getChatsApi();
         setChatArray(allChats);
     }
 

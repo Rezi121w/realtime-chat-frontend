@@ -86,3 +86,9 @@
     border-top-right-radius: 0;
 }
 
+.editBtn{
+    display: flex;
+    justify-content: flex-end;
+    gap: 5px;
+}
+
