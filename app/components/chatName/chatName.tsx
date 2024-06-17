@@ -2,6 +2,7 @@ import styles from "./chatName.module.css";
 import Image from "next/image";
 import {getChatsApi} from "@/app/Api/Chat.api";
 import {useEffect, useState} from "react";
+import Link from "next/link";
 
 interface chatProps {
     id: number;
@@ -21,8 +22,10 @@ export default function ChatName() {
         <div className={styles.chatCards}>
             {chatArray.map((chat) => (
                 <div key={chat.id} className={styles.chatCard}>
-                    <Image src={"Vector.svg"} alt={"Message"} height={20} width={20}/>
-                    <span className={styles.chatName}>{chat.name}</span>
+                    <Image src={"/Vector.svg"} alt={"Message"} height={20} width={20}/>
+                    <Link href={`/chats/${chat.id}`}>
+                        <span className={styles.chatName}>{chat.name}</span>
+                    </Link>
                 </div>
             ))
 

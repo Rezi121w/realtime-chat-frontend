@@ -15,7 +15,7 @@ export const getChatsApi = async (accessToken: string) => {
     }
 };
 
-export const getChatByIdApi = async (id: number, accessToken: string) => {
+export const getChatByIdApi = async (id: string, accessToken: string) => {
     try {
         const response = await axios.get(`${BASEURL}/chats/${id}`, {
             headers: {

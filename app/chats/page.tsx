@@ -3,7 +3,6 @@
 import styles from './page.module.css';
 import ChatMenu from "@/app/components/chatMenu/chatMenu";
 
-import RealChat from '../components/realChat/realChat';
 
 export default function Chats() {
 
@@ -11,10 +10,6 @@ export default function Chats() {
         <>
             <div className={styles.chatsMain}>
                 <ChatMenu/>
-
-                <RealChat/>
-
-
             </div>
         </>
     );
