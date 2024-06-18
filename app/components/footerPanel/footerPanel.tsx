@@ -33,7 +33,7 @@ export default function FooterPanel() {
 
     <div className={styles.outPanel}>
                 <Image src={"/power_settings_new.svg"} alt={"log out"}  width={20} height={20} />
-                <span className={styles.out}>Log out</span>
+                <Link href={'/'}><span onClick={() => {localStorage.removeItem('user')}} className={styles.out}>Log out</span></Link>
             </div>
 
         </div>

@@ -16,14 +16,13 @@ export const LoginApi = async (username: string, pass: string) => {
     }
 };
 
-export const ChangeProfileApi = async (accessToken: string, imageLink: string) => {
+export const ChangeProfileApi = async (imageLink: string) => {
     try {
-        const response = await axios.post(`${BASEURL}/auth/me`, {
-            profileImage: imageLink,
-
-            headers: {
-                'Authorization': accessToken,
-            }
+        const response = await axios.post(`${BASEURL}/auth/profile`, {
+        profileImage: imageLink,
+        },{ headers: {
+            'Authorization': accessToken,
+        }
         });
 
         return response.data;
@@ -32,12 +31,13 @@ export const ChangeProfileApi = async (accessToken: string, imageLink: string) =
     }
 };
 
-export const ChangePassApi = async (accessToken: string, lastPass: string, newPass: string) => {
+export const ChangePassApi = async (lastPass: string, newPass: string) => {
     try {
-        const response = await axios.post(`${BASEURL}/auth/me`, {
+        const response = await axios.post(`${BASEURL}/auth/change`, {
             pass: lastPass,
             newpass: newPass,
-
+            },
+            {
             headers: {
                 'Authorization': accessToken,
             }

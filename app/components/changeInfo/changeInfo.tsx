@@ -2,41 +2,71 @@ import styles from './changeInfo.module.css';
 import Image from "next/image";
 import React, { useState } from "react";
 import {ChangePassApi, ChangeProfileApi} from "@/app/Api/Auth.api";
+import {Bounce, toast, ToastContainer} from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+import {useRecoilValueLoadable} from "recoil";
+import {userInfoAtom} from "@/app/userInfo";
 
 
 export default function ChangeInfoComp() {
     const [profileImageLink, setProfileImageLink] = useState<string>('');
     const [lastPassword, setLastPassword] = useState<string>('');
     const [newPassword, setNewPassword] = useState<string>('');
-    const accessToken = localStorage.getItem("user") || "";
+    const userInfoLoadable = useRecoilValueLoadable(userInfoAtom);
+    const userInfo = userInfoLoadable.contents;
 
     const handleProfileImageChange = async (e: React.FormEvent) => {
         e.preventDefault();
-        const response = await ChangeProfileApi(accessToken, profileImageLink);
-        if (response.success) {
-            // Handle success (e.g., show a success message, update UI)
-            console.log("Profile image updated successfully");
+        const response = await ChangeProfileApi(profileImageLink);
+        console.log(response);
+        if (response.message) {
+            for(let element of response.message) {
+                toast.error(element);
+            }
         } else {
-            // Handle error (e.g., show an error message)
-            console.error("Failed to update profile image");
+            toast.success("Profile changed successfully");
+            setProfileImageLink("");
         }
     };
 
     const handleChangePassword = async (e: React.FormEvent) => {
         e.preventDefault();
-        const response = await ChangePassApi(accessToken, lastPassword, newPassword);
-        if (response.success) {
-            console.log("Password updated successfully");
+        const response = await ChangePassApi(lastPassword, newPassword);
+        if(response.message) {
+            if(response.statusCode == 400 || response.statusCode == 401) {
+                for(let element of response.message) {
+                    toast.error(element);
+                }
+            } else {
+                toast.error(response.message);
+            }
         } else {
-            console.error("Failed to update password");
+            toast.success("Password changed successfully");
+            setLastPassword("");
+            setNewPassword("");
         }
+
     };
 
     return (
+        <>
+            <ToastContainer
+                position='top-center'
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+                transition={Bounce}
+            />
         <div className={styles.mainContainer}>
             <div className={styles.editheading}>
                 <h1 className={styles.header}>Edit profile</h1>
-                <Image src={'/defaultIcon.png'} alt={'icon'} width={120} height={120} />
+                <Image src={userInfo.profileImg || '/defaultIcon.png'} alt={'icon'} width={120} height={120} />
             </div>
 
             <form className={styles.imgLink} onSubmit={handleProfileImageChange}>
@@ -81,5 +111,6 @@ export default function ChangeInfoComp() {
                 </div>
             </form>
         </div>
+        </>
     );
 }

@@ -9,14 +9,14 @@ const getUserData = async () => {
     } catch (error) {
       console.error('Error fetching user data:', error);
       return {
-        userName: "none",
+        userName: "",
         role: "none",
         profileImage: "null",
       };
     }
   }
   return {
-    userName: "none",
+    userName: "",
     role: "none",
     profileImage: "null",
   };

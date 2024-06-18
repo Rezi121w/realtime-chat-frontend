@@ -1,15 +1,16 @@
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import ChatInput from "../chatInput/chatInput";
 import styles from "./realChat.module.css";
 import Image from "next/image";
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 import timezone from 'dayjs/plugin/timezone';
-import { getChatByIdApi } from "@/app/Api/Chat.api";
+import {getChatByIdApi, getChatsApi} from "@/app/Api/Chat.api";
 import { useRecoilValueLoadable } from "recoil";
 import { userInfoAtom } from "@/app/userInfo";
 import { changeMessageApi, deleteMessageApi } from "@/app/Api/Message.api";
 import Modal from "@/app/components/modal/modal";
+import {Bounce, toast, ToastContainer} from "react-toastify";
 
 
 dayjs.extend(utc);
@@ -60,8 +61,11 @@ export default function RealChat({ chatId }: RealChatProps) {
     async function deleteMessage(id: string) {
         const response = await deleteMessageApi(id);
         if(response.message) {
-            getChatInfo();
+            for(let element of response.messages) {
+                toast.error(element);
+            }
         }
+        await getChatInfo();
     }
 
     async function changeMessage(id: string, newContent: string) {
@@ -93,20 +97,35 @@ export default function RealChat({ chatId }: RealChatProps) {
         }
     }, [chatInfo]);
 
-    const handleEditClick = (id: string) => {
+    const handleEditClick = async (id: string) => {
         setEditingMessageId(id);
         setIsModalOpen(true);
     };
 
-    const handleSave = (newContent: string) => {
+    const handleSave = async (newContent: string) => {
         if (editingMessageId) {
-            changeMessage(editingMessageId, newContent);
+            await changeMessage(editingMessageId, newContent);
         }
         setIsModalOpen(false);
         setEditingMessageId(null);
+        await getChatInfo();
     };
 
     return (
+        <>
+            <ToastContainer
+                position='top-center'
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+                transition={Bounce}
+            />
         <div className={styles.mainContainer}>
             <div className={styles.chatsCont} ref={chatContainerRef}>
                 {chatInfo?.messages && chatInfo.messages.map((message) => (
@@ -156,5 +175,6 @@ export default function RealChat({ chatId }: RealChatProps) {
                 onSave={handleSave}
             />
         </div>
+        </>
     );
 }

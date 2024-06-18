@@ -10,7 +10,7 @@ interface chatProps {
 }
 
 export default function ChatName() {
-    const [chatArray, setChatArray] = useState<chatProps[]>([{id: 0, name: ""}]);
+    const [chatArray, setChatArray] = useState<chatProps[]>([]);
 
     async function getChats() {
         const allChats = await getChatsApi();
@@ -20,7 +20,7 @@ export default function ChatName() {
     useEffect(() => {getChats();}, [])
     return(
         <div className={styles.chatCards}>
-            {chatArray.map((chat) => (
+            {chatArray.length > 0 && chatArray.map((chat) => (
                 <div key={chat.id} className={styles.chatCard}>
                     <Image src={"/Vector.svg"} alt={"Message"} height={20} width={20}/>
                     <Link href={`/chats/${chat.id}`}>
