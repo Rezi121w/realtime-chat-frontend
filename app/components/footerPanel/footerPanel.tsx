@@ -27,10 +27,11 @@ export default function FooterPanel() {
 
             <div className={styles.changePanel}>
                 <Image src={"/out.svg"} alt={"Vector"} width={20} height={20}/>
-                <span className={styles.change}  onClick={handleChangeInfoClick}> <Link href={'./changeInfo'}>Change Account</Link> </span>
-            </div>
+               <Link href={'./changeInfo'}>   <span className={styles.change}  onClick={handleChangeInfoClick}>Change Account </span></Link>
 
-            <div className={styles.outPanel}>
+        </div>
+
+    <div className={styles.outPanel}>
                 <Image src={"/power_settings_new.svg"} alt={"log out"}  width={20} height={20} />
                 <span className={styles.out}>Log out</span>
             </div>

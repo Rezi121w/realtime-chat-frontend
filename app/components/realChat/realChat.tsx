@@ -8,15 +8,39 @@ import timezone from 'dayjs/plugin/timezone';
 import { getChatByIdApi } from "@/app/Api/Chat.api";
 import { useRecoilValueLoadable } from "recoil";
 import { userInfoAtom } from "@/app/userInfo";
-import {changeMessageApi, deleteMessageApi} from "@/app/Api/Message.api";
+import { changeMessageApi, deleteMessageApi } from "@/app/Api/Message.api";
+import Modal from "@/app/components/modal/modal";
+
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
 
-export default function RealChat({ chatId }: any) {
+interface Message {
+    id: string;
+    content: string;
+    createdAt: string;
+    sender: {
+        id: string;
+        userName: string;
+        profileImg: string;
+    };
+}
+
+interface ChatInfo {
+    name: string;
+    messages: Message[];
+}
+
+interface RealChatProps {
+    chatId: string;
+}
+
+export default function RealChat({ chatId }: RealChatProps) {
     const guessedTimezone = dayjs.tz.guess();
 
-    const [chatInfo, setChatInfo] = useState<any>();
+    const [chatInfo, setChatInfo] = useState<ChatInfo | null>(null);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [editingMessageId, setEditingMessageId] = useState<string | null>(null);
     const chatContainerRef = useRef<HTMLDivElement>(null);
     const userInfoLoadable = useRecoilValueLoadable(userInfoAtom);
     const userInfo = userInfoLoadable.contents;
@@ -36,16 +60,21 @@ export default function RealChat({ chatId }: any) {
     async function deleteMessage(id: string) {
         const response = await deleteMessageApi(id);
         if(response.message) {
-
+            getChatInfo();
         }
-        getChatInfo()
     }
 
-    async function changeMessage(id: string) {
-        const message = prompt("Enter new message:");
-        if (!message) return;
-
-        await changeMessageApi(id, message);
+    async function changeMessage(id: string, newContent: string) {
+        const response = await changeMessageApi(id, newContent);
+        if (response.message) {
+            setChatInfo((prevChatInfo) => {
+                if (!prevChatInfo) return prevChatInfo;
+                const updatedMessages = prevChatInfo.messages.map((message) =>
+                    message.id === id ? { ...message, content: newContent } : message
+                );
+                return { ...prevChatInfo, messages: updatedMessages };
+            });
+        }
     }
 
     function getDayJSTime(dateString: string) {
@@ -64,10 +93,23 @@ export default function RealChat({ chatId }: any) {
         }
     }, [chatInfo]);
 
+    const handleEditClick = (id: string) => {
+        setEditingMessageId(id);
+        setIsModalOpen(true);
+    };
+
+    const handleSave = (newContent: string) => {
+        if (editingMessageId) {
+            changeMessage(editingMessageId, newContent);
+        }
+        setIsModalOpen(false);
+        setEditingMessageId(null);
+    };
+
     return (
         <div className={styles.mainContainer}>
             <div className={styles.chatsCont} ref={chatContainerRef}>
-                {chatInfo && chatInfo.messages.map((message: any) => (
+                {chatInfo?.messages && chatInfo.messages.map((message) => (
                     <div key={message.id} className={message.sender.id === userInfo.id ? styles.chatResponse : styles.chat}>
                         {message.sender.id === userInfo.id ? (
                             <>
@@ -82,8 +124,8 @@ export default function RealChat({ chatId }: any) {
                                         </span>
                                     </div>
                                     <div className={styles.editBtn}>
-                                     <Image onClick={() => changeMessage(message.id)} src={"/pen.png"} alt={"editing"} width={30} height={30} />
-                                    <Image onClick={() => {deleteMessage(message.id)}} src={"/remove.png"} alt={"delete"} width={30} height={30} />
+                                        <Image onClick={() => handleEditClick(message.id)} src={"/pen.png"} alt={"editing"} width={30} height={30} />
+                                        <Image onClick={() => deleteMessage(message.id)} src={"/remove.png"} alt={"delete"} width={30} height={30} />
                                     </div>
                                 </div>
                                 <Image src={message.sender.profileImg || "/defaultIcon.png"} alt={"icon"} width={30} height={30} />
@@ -108,6 +150,11 @@ export default function RealChat({ chatId }: any) {
                 ))}
             </div>
             {chatInfo && <ChatInput chatName={chatInfo.name} chatId={chatId} refresh={getChatInfo} />}
+            <Modal
+                isOpen={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+                onSave={handleSave}
+            />
         </div>
     );
 }
