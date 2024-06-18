@@ -1,7 +1,10 @@
 import axios from "axios";
 
 const BASEURL = process.env.Base_URL;
-const accessToken = localStorage.getItem("user") || "";
+let accessToken = "";
+if(typeof window !== "undefined") {
+    accessToken = localStorage.getItem("user") || "";
+}
 
 export const LoginApi = async (username: string, pass: string) => {
     try {

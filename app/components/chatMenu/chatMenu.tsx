@@ -4,7 +4,7 @@ import { useRecoilValueLoadable } from "recoil";
 import { userInfoAtom } from "@/app/userInfo";
 import ChatName from "@/app/components/chatName/chatName";
 import FooterPanel from "@/app/components/footerPanel/footerPanel";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 export default function ChatMenu() {
     const userInfoLoadable = useRecoilValueLoadable(userInfoAtom);
@@ -16,7 +16,7 @@ export default function ChatMenu() {
         setMenuOpen(!menuOpen);
     };
 
-    if(userInfo.name == "") {
+    if(userInfo.name === "" && loaded <= 100) {
         setLoaded(loaded + 1);
     }
 
