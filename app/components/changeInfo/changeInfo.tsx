@@ -1,7 +1,7 @@
 import styles from './changeInfo.module.css';
 
 
-export default function ChangeInfo() {
+export default function ChangeInfoComp() {
 
     return(
         <>

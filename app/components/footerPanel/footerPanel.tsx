@@ -27,7 +27,7 @@ export default function FooterPanel() {
 
             <div className={styles.changePanel}>
                 <Image src={"/out.svg"} alt={"Vector"} width={20} height={20}/>
-               <Link href={'./changeInfo'}>   <span className={styles.change}  onClick={handleChangeInfoClick}>Change Account </span></Link>
+               <Link href={'/changeInfo'}>   <span className={styles.change}  onClick={handleChangeInfoClick}>Change Account </span></Link>
 
         </div>
 
