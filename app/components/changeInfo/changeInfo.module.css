@@ -2,7 +2,7 @@
     border-radius: 16px;
     background-color: #222222;
     margin: 14px;
-    padding: 2rem;
+    padding: 6rem;
     color: #ffffff;
     border: 1px solid #ffffff26;
     flex: 1;
@@ -14,4 +14,75 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+}
+
+.editheading{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header{
+    color:  #FD0053;
+    font-size: 45px;
+}
+
+
+.imgLink, .passLink{
+    display: flex;
+    gap: 5px;
+    flex-direction: column;
+}
+
+.passLink{
+    gap: 3rem;
+}
+
+.forms{
+    display: flex;
+    flex-direction: row;
+}
+
+.inputLabel{
+    font-size: 26px;
+    font-weight: 600;
+}
+
+.imgInput {
+    flex: 1;
+}
+
+.imgInput, .saveBtn, .cancelBtn{
+    border-radius: 5px;
+    border: none;
+    font-size: 24px;
+    padding: 10px;
+}
+
+.saveBtn{
+    background-color: #94005B;
+    color: #ffffff;
+    font-weight: 600;
+    padding: 8px 24px;
+    cursor: pointer;
+}
+
+.cancelBtn{
+    font-weight: 600;
+    padding: 8px 24px;
+    cursor: pointer;
+    color: #FD0053;
+    border: 1px solid #FD0053;
+    font-weight: normal;
+}
+
+.btnCont{
+    display: flex;
+    gap: 3rem;
+}
+
+.gapped{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
 }
