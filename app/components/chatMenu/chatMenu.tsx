@@ -16,9 +16,12 @@ export default function ChatMenu() {
         setMenuOpen(!menuOpen);
     };
 
-    if(userInfo.name === "" && loaded <= 100) {
-        setLoaded(loaded + 1);
-    }
+    useEffect(() => {
+        if (userInfo.name === "" && loaded <= 100) {
+            const timer = setTimeout(() => setLoaded(loaded + 1), 100); 
+            return () => clearTimeout(timer); 
+        }
+    }, [userInfo.name, loaded]);
 
     return (
         <>
