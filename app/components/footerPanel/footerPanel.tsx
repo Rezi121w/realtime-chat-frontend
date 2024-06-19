@@ -21,7 +21,7 @@ export default function FooterPanel() {
             {userInfo.role == "admin" ? (
                 <div className={styles.adminPanel}>
                     <Image src={"/wb_sunny.svg"} alt={"sun"} width={20} height={20}/>
-                    <span className={styles.admin}>Admin Panel</span>
+                    <Link href={'/adminPanel'}> <span className={styles.admin}>Admin Panel</span></Link>
                 </div>
             ) : ""}
 

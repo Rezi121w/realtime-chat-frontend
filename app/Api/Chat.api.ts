@@ -31,3 +31,29 @@ export const getChatByIdApi = async (id: string) => {
         return error.response.data;
     }
 };
+
+export const clearChatApi = async (id: string) => {
+    try {
+        const response = await axios.delete(`${BASEURL}/chats/clear/${id}`, {
+            headers: {
+                'Authorization': accessToken,
+            }
+        });
+        return response.data;
+    } catch (error: any) {
+        return error.response.data;
+    }
+};
+
+export const deleteChatApi = async (id: string) => {
+    try {
+        const response = await axios.delete(`${BASEURL}/chats/${id}`, {
+            headers: {
+                'Authorization': accessToken,
+            }
+        });
+        return response.data;
+    } catch (error: any) {
+        return error.response.data;
+    }
+};

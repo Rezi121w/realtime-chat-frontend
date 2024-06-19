@@ -1,0 +1,40 @@
+.mainContainer {
+    border-radius: 16px;
+    background-color: #222222;
+    margin: 14px;
+    padding: 2rem;
+    color: #ffffff;
+    border: 1px solid #ffffff26;
+    flex: 1;
+    background-repeat: no-repeat;
+    background-position: bottom;
+    background-size: cover;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+/* CHAT_CARDS */
+.chatCards {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+.chatCard {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #181a21;
+    border-radius: 21px;
+    padding: 12px;
+}
+.chatCard_1 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.chatCard_2 {
+    display: flex;
+    align-items: center;
+    gap: 8.5px;
+}
